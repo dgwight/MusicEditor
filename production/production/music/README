@@ -1,0 +1,61 @@
+README: HW7
+Dylan Wight + Dorian Franklin
+
+To run call MusicEditor with the filename and then "composite" as arguments
+
+CONTROLS:
+Use the arrow keys to navigate the song.
+Use "LEFT CLICK" to add a note with the displayed values at the clicked location.
+Use "MIDDLE CLICK" to copy a notes values .
+Use "RIGHT CLICK" to cut a note. It deletes and updates the values.
+Use "P" to play the song from the start.
+Use "SPACE" to pause and resume the song.
+Use "O" to save the song to a .txt file (saved in the format that songs were given).
+Use "Q" and "W" to decrease/increase the duration.
+Use "A" and "S" to decrease/increase the volume.
+Use "Z" and "X" to cycle through instruments.
+
+MODEL CHANGES:
+changed Note to have a Boolean isHit value so that I did not need a separate datastucture
+ in SongImpl to keep track of sustained note. Now when a note is added a "hit note" is added
+  at the time specified and  the  required sustained notes are added after.
+
+added a volume field to Note. 
+
+
+VIEW CHANGES:
+add protected int beat field to GUIViewImpl, this is used to determine the location of the
+ redline.
+
+add protected void play method to GUIViewImpl, this is used to increment the location of the
+ redline, as well as the shift the view right when the redline hits the edge of the window.
+
+added private boolean hasT1 field in CombinedView to
+ combat exceptions when start is pressed multiple times
+
+ nested class TimerTaskThingy into Combined view and made it private, too prevent implentation
+  details from leaking
+
+add 3 lines of code,161-163 in GUIViewImpl to draw the redline;
+
+changed starting value of beat field in GUIViewImpl to -5, 
+so that it is only draw on screen during the CompositeView
+
+added an addKeyListener method to CombinedView, this was so runnables that involve the 
+CombinedView could work
+
+added boolean hasCurrent to GUIViewImpl to represent whether the user is currently editing
+ a Note
+
+added private int currentTime field to GUIViewImpl, to represent whether the start time of
+ the current note
+
+added protected getNoteAt(int time, int tone) in Song
+
+add lines in mouseClicked method in GUIViewImpl that allows for a note to be moved
+
+added frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE) in GUIViewPanel, in fix 
+midi still playing after the window was closed
+
+
+
